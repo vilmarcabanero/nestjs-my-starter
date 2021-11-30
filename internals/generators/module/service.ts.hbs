@@ -1,0 +1,40 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { {{ properCase name }}Payload } from './{{ dashCase name }}.payload';
+import { {{ properCase name }}, {{ properCase name}}Document } from './{{ dashCase name }}.schema';
+
+@Injectable()
+export class {{ properCase name }}Service {
+  constructor(@InjectModel({{ properCase name }}.name) private {{ camelCase name }}: Model<{{ properCase name }}Document>) {}
+
+  async get{{ properCase name }}s(userId: string): Promise<{{ properCase name }}[]> {
+    const {{ camelCase name }}s = await this.{{ camelCase name }}.find({ userId });
+    return {{ camelCase name }}s;
+  }
+
+  async get{{ properCase name }}(_id: string): Promise<{{ properCase name }}> {
+    const {{ camelCase name }} = await this.{{ camelCase name }}.findById(_id);
+    return {{ camelCase name }};
+  }
+
+  async create{{ properCase name }}(userId: string, payload: {{ properCase name }}Payload): Promise<{{ properCase name }}> {
+    const {{ camelCase name }} = new this.{{ camelCase name }}({ ...payload, userId });
+    return {{ camelCase name }}.save();
+  }
+
+  async update{{ properCase name }}(_id: string, payload: {{ properCase name }}Payload): Promise<any> {
+    const updates = {
+      default: payload.default,
+    };
+
+    await this.{{ camelCase name }}.findByIdAndUpdate(_id, updates);
+    return {
+      message: `{{ properCase name }} with id of ${_id} has been updated.`,
+    };
+  }
+
+  async delete{{ properCase name }}(_id: string): Promise<any> {
+    return this.{{ camelCase name }}.findByIdAndDelete(_id);
+  }
+}

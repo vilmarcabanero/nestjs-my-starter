@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/decorators/get.user.decorator';
+import { GetUser } from 'app/decorators/get.user.decorator';
 import { AuthService } from '.';
 import { RegisterPayload } from './register.payload';
 

@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class TaskPayload {
+export class {{ properCase name }}Payload {
   @IsNotEmpty()
-  task: string;
+  default: string;
 }

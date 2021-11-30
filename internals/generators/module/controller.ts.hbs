@@ -1,0 +1,50 @@
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'app/decorators/get.user.decorator';
+import { {{ properCase name}}Service, {{ properCase name}}, {{ properCase name}}Payload } from '.';
+
+@UseGuards(AuthGuard())
+@Controller('/api/{{ dashCase name}}s')
+export class {{ properCase name}}Controller {
+  constructor(private readonly {{ camelCase name}}Service: {{ properCase name}}Service) {}
+
+  @Get()
+  async get{{ properCase name}}s(@GetUser() user: any): Promise<{{ properCase name}}[]> {
+    return this.{{ camelCase name}}Service.get{{ properCase name}}s(user._id);
+  }
+
+  @Get('/:id')
+  async get{{ properCase name}}(@Param('id') _id: string): Promise<{{ properCase name}}> {
+    return this.{{ camelCase name}}Service.get{{ properCase name}}(_id);
+  }
+
+  @Post()
+  async create{{ properCase name}}(
+    @Body() payload: {{ properCase name}}Payload,
+    @GetUser() user: any,
+  ): Promise<{{ properCase name}}> {
+    return this.{{ camelCase name}}Service.create{{ properCase name}}(user._id, payload);
+  }
+
+  @Patch('/:id')
+  async update{{ properCase name}}(
+    @Param('id') _id: string,
+    @Body() payload: {{ properCase name}}Payload,
+  ): Promise<any> {
+    return this.{{ camelCase name}}Service.update{{ properCase name}}(_id, payload);
+  }
+
+  @Delete('/:id')
+  async delete{{ properCase name}}(@Param('id') _id: string): Promise<{{ properCase name}}> {
+    return this.{{ camelCase name}}Service.delete{{ properCase name}}(_id);
+  }
+}
